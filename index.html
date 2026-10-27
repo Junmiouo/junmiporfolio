@@ -1,6 +1,3 @@
-
-```html
-
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -8,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#FEFFEF">
   <title>Junmi | Animation Portfolio</title>
+  <meta name="description" content="Junmi 的動畫與視覺敘事個人作品集 — 2D 動畫、After Effects 動態設計、數位繪圖與視覺實驗。">
+
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Favicon (SVG 內嵌免額外檔案) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23FF8D8D'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-size='56' fill='%233B1B26' font-family='sans-serif' font-weight='900'>✳</text></svg>">
 
   <style>
     /* ===== 四色主題 ===== */
@@ -61,6 +67,7 @@
       font-size: clamp(30px, 4vw, 44px);
       line-height: 1.4;
       margin-bottom: 35px;
+      font-weight: 900;
     }
 
     .section-title span {
@@ -83,6 +90,11 @@
       background: rgba(254, 255, 239, 0.94);
       backdrop-filter: blur(12px);
       border-bottom: 2px solid var(--wine);
+      transition: box-shadow 0.3s;
+    }
+
+    header.scrolled {
+      box-shadow: 0 4px 15px rgba(59, 27, 38, 0.08);
     }
 
     nav {
@@ -97,10 +109,24 @@
       font-size: 25px;
       font-weight: 900;
       letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: transform 0.2s;
+    }
+
+    .logo:hover {
+      transform: scale(1.04);
     }
 
     .logo span {
       color: #F07880;
+      display: inline-block;
+      animation: spin 10s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
     }
 
     .nav-links {
@@ -108,14 +134,34 @@
       gap: 24px;
       list-style: none;
       font-size: 14px;
+      font-weight: 700;
     }
 
     .nav-links a {
       transition: color 0.25s;
+      position: relative;
+      padding: 4px 0;
     }
 
-    .nav-links a:hover {
+    .nav-links a:hover,
+    .nav-links a.active {
       color: #D45F72;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #D45F72;
+      transition: width 0.25s;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
     }
 
     /* ===== 首頁 ===== */
@@ -139,6 +185,7 @@
       line-height: 1.35;
       letter-spacing: -1px;
       margin-bottom: 24px;
+      font-weight: 900;
     }
 
     .hero h1 span {
@@ -149,6 +196,7 @@
     .hero p {
       color: var(--gray);
       margin-bottom: 30px;
+      font-size: 17px;
     }
 
     .btn {
@@ -160,11 +208,14 @@
       border-radius: 50px;
       font-weight: bold;
       transition: 0.3s;
+      box-shadow: 3px 3px 0 var(--wine);
+      cursor: pointer;
     }
 
     .btn:hover {
       background: var(--lime);
       transform: translateY(-4px);
+      box-shadow: 5px 5px 0 var(--wine);
     }
 
     /* 首頁抽象裝飾 */
@@ -223,6 +274,7 @@
       font-size: 13px;
       font-weight: bold;
       transform: rotate(-8deg);
+      box-shadow: 4px 4px 0 var(--wine);
     }
 
     @keyframes blobMove {
@@ -238,6 +290,8 @@
     /* ===== 關於我 ===== */
     #about {
       background: #FFF9F3;
+      border-top: 2px solid var(--wine);
+      border-bottom: 2px solid var(--wine);
     }
 
     .about-grid {
@@ -258,23 +312,33 @@
       border: 2px solid var(--wine);
       border-radius: 20px 20px 20px 5px;
       transform: rotate(1deg);
+      box-shadow: 5px 5px 0 var(--wine);
+      transition: transform 0.3s;
+    }
+
+    .about-card:hover {
+      transform: rotate(0deg) translateY(-3px);
     }
 
     .about-card h3 {
       font-size: 23px;
       margin-bottom: 12px;
+      font-weight: 900;
     }
 
     .about-card p {
       color: #554A36;
+      font-weight: 500;
     }
 
     .deco-label {
       display: inline-block;
       padding: 5px 13px;
       background: var(--pink);
+      border: 1.5px solid var(--wine);
       border-radius: 30px;
       font-size: 12px;
+      font-weight: 700;
       margin-bottom: 14px;
     }
 
@@ -316,6 +380,7 @@
     .skill-card h3 {
       font-size: 21px;
       margin: 12px 0;
+      font-weight: 900;
     }
 
     .skill-card p {
@@ -326,12 +391,15 @@
     /* ===== 精選作品 ===== */
     #works {
       background: #FFF9F3;
+      border-top: 2px solid var(--wine);
+      border-bottom: 2px solid var(--wine);
     }
 
     .works-intro {
       color: var(--gray);
       margin-top: -20px;
       margin-bottom: 35px;
+      font-size: 15px;
     }
 
     .works-grid {
@@ -346,6 +414,7 @@
       border: 2px solid var(--wine);
       border-radius: 18px;
       transition: 0.3s;
+      cursor: pointer;
     }
 
     .work-card:hover {
@@ -361,6 +430,7 @@
       position: relative;
       overflow: hidden;
       background: var(--pink);
+      border-bottom: 2px solid var(--wine);
     }
 
     .work-card:nth-child(2) .work-image {
@@ -375,7 +445,7 @@
       background: #F7D7D3;
     }
 
-    /* 新增：讓作品圖片填滿封面 */
+    /* 讓作品圖片填滿封面 */
     .work-image img {
       position: absolute;
       inset: 0;
@@ -383,28 +453,32 @@
       height: 100%;
       max-width: none;
       object-fit: cover;
-      transition: transform 0.4s;
+      transition: transform 0.4s ease;
+      z-index: 0;
     }
 
-    /* 新增：滑鼠移到封面時，圖片稍微放大 */
+    /* 滑鼠移到封面時，圖片稍微放大 */
     .work-card:hover .work-image img {
-      transform: scale(1.04);
+      transform: scale(1.06);
     }
 
     .work-image span {
       position: relative;
       z-index: 1;
-      font-size: clamp(19px, 3vw, 30px);
+      font-size: clamp(19px, 3vw, 28px);
       font-weight: 900;
       letter-spacing: 2px;
       color: var(--wine);
       text-align: center;
-      padding: 12px;
+      padding: 10px 16px;
       transition: transform 0.3s;
+      text-shadow: 0 0 14px rgba(254, 255, 239, 0.95), 0 0 4px rgba(254, 255, 239, 0.85);
+      pointer-events: none;
     }
 
     .work-card:nth-child(3) .work-image span {
       color: var(--bg);
+      text-shadow: 0 0 14px rgba(59, 27, 38, 0.95), 0 0 4px rgba(59, 27, 38, 0.85);
     }
 
     .work-card:hover .work-image span {
@@ -417,6 +491,7 @@
 
     .work-info h3 {
       font-size: 21px;
+      font-weight: 900;
     }
 
     .work-info p {
@@ -429,9 +504,325 @@
       display: inline-block;
       padding: 3px 11px;
       margin: 12px 5px 0 0;
-      border: 1px solid var(--wine);
+      border: 1.5px solid var(--wine);
       border-radius: 30px;
       font-size: 11px;
+      font-weight: 700;
+      background: var(--bg);
+    }
+
+    /* ===== 作品詳情彈窗 (Modal) ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(59, 27, 38, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      background: var(--bg);
+      border: 3px solid var(--wine);
+      border-radius: 24px;
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 10px 10px 0 var(--wine);
+      position: relative;
+      transform: scale(0.95) translateY(20px);
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      padding: 30px;
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 38px;
+      height: 38px;
+      background: var(--pink);
+      border: 2px solid var(--wine);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 900;
+      cursor: pointer;
+      color: var(--wine);
+      transition: transform 0.2s, background 0.2s;
+      z-index: 10;
+    }
+
+    .modal-close-btn:hover {
+      background: var(--lime);
+      transform: rotate(90deg);
+    }
+
+    /* 影片播放器樣式 */
+    .video-player-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000000;
+      border: 2px solid var(--wine);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 4px 4px 0 var(--wine);
+      margin: 18px 0 10px;
+      position: relative;
+    }
+
+    .video-player-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .video-footer-bar {
+      margin-top: 6px;
+      padding: 9px 15px;
+      background: var(--panel);
+      border: 1.5px solid var(--wine);
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .video-footer-title {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--wine);
+    }
+
+    .video-selector-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .video-select-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      background: var(--panel);
+      border: 2px solid var(--wine);
+      border-radius: 12px;
+      cursor: pointer;
+      opacity: 0.65;
+      transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .video-select-item img {
+      width: 72px;
+      height: 44px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--wine);
+    }
+
+    .video-select-item span {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--wine);
+    }
+
+    .video-select-item:hover {
+      opacity: 0.95;
+      transform: translateY(-2px);
+    }
+
+    .video-select-item.active {
+      opacity: 1;
+      border-color: #D45F72;
+      background: var(--bg);
+      box-shadow: 0 0 0 2px #D45F72, 3px 3px 0 var(--wine);
+      transform: translateY(-2px);
+    }
+
+    /* 畫廊樣式 */
+    .gallery-container {
+      width: 100%;
+      margin: 18px 0;
+    }
+
+    .gallery-main-view {
+      position: relative;
+      width: 100%;
+      height: 440px;
+      max-height: 56vh;
+      background: #1F0D14;
+      border: 2px solid var(--wine);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 25px rgba(0,0,0,0.4);
+    }
+
+    .gallery-main-view img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      transition: opacity 0.2s ease;
+    }
+
+    .gallery-counter {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(254, 255, 239, 0.95);
+      border: 1.5px solid var(--wine);
+      font-size: 11px;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 20px;
+      color: var(--wine);
+      z-index: 5;
+    }
+
+    .gallery-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--bg);
+      color: var(--wine);
+      border: 2px solid var(--wine);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 900;
+      cursor: pointer;
+      z-index: 5;
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: 2px 2px 0 var(--wine);
+    }
+
+    .gallery-btn:hover {
+      background: var(--pink);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .gallery-btn.prev { left: 12px; }
+    .gallery-btn.next { right: 12px; }
+
+    .gallery-caption-bar {
+      margin-top: 10px;
+      padding: 9px 15px;
+      background: var(--panel);
+      border: 1.5px solid var(--wine);
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .gallery-caption-title {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--wine);
+    }
+
+    .gallery-open-full {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--wine);
+      text-decoration: underline;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .gallery-open-full:hover {
+      color: #D45F72;
+    }
+
+    .gallery-thumbs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .gallery-thumb-item {
+      aspect-ratio: 16 / 10;
+      border: 2px solid var(--wine);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #1F0D14;
+      opacity: 0.6;
+      transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .gallery-thumb-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .gallery-thumb-item:hover {
+      opacity: 0.95;
+      transform: translateY(-2px);
+    }
+
+    .gallery-thumb-item.active {
+      opacity: 1;
+      border-color: #D45F72;
+      box-shadow: 0 0 0 2.5px #D45F72, 3px 3px 0 var(--wine);
+      transform: translateY(-2px);
+    }
+
+    .modal-description {
+      color: var(--gray);
+      font-size: 15px;
+      line-height: 1.8;
+      margin-top: 15px;
+    }
+
+    .modal-meta {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1.5px dashed var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      font-size: 13px;
+    }
+
+    .modal-meta-item strong {
+      color: var(--wine);
     }
 
     /* ===== 學習歷程 ===== */
@@ -465,6 +856,7 @@
     .timeline-item h3 {
       font-size: 20px;
       margin-bottom: 7px;
+      font-weight: 900;
     }
 
     .timeline-item p {
@@ -474,6 +866,7 @@
     /* ===== 聯絡我 ===== */
     #contact {
       background: var(--lime);
+      border-top: 2px solid var(--wine);
     }
 
     .contact-box {
@@ -509,12 +902,49 @@
       border: 2px solid var(--wine);
       border-radius: 40px;
       background: var(--panel);
+      font-weight: 700;
       transition: 0.3s;
+      box-shadow: 3px 3px 0 var(--wine);
     }
 
     .contact-links a:hover {
       background: var(--pink);
       transform: translateY(-3px);
+      box-shadow: 5px 5px 0 var(--wine);
+    }
+
+    /* 回頂部按鈕 */
+    .back-to-top {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 46px;
+      height: 46px;
+      background: var(--pink);
+      color: var(--wine);
+      border: 2px solid var(--wine);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 900;
+      box-shadow: 3px 3px 0 var(--wine);
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.2s, background 0.2s;
+      z-index: 90;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .back-to-top:hover {
+      background: var(--lime);
+      transform: translateY(-4px);
     }
 
     /* ===== 頁尾 ===== */
@@ -597,6 +1027,14 @@
       .contact-box {
         padding: 35px 17px;
       }
+
+      .gallery-main-view {
+        height: 280px;
+      }
+
+      .modal-content {
+        padding: 20px;
+      }
     }
 
     /* 減少動態效果：尊重系統設定 */
@@ -621,7 +1059,7 @@
 <body>
 
   <!-- ===== 導覽列 ===== -->
-  <header>
+  <header id="mainHeader">
     <nav class="container">
       <a href="#home" class="logo">
         JUNMI<span>✳</span>
@@ -767,16 +1205,17 @@
         <h2 class="section-title">精選<span>作品</span></h2>
 
         <p class="works-intro">
-          每一份作品，都是一次新的嘗試與探索。
+          每一份作品，都是一次新的嘗試與探索。（點擊卡片可查看詳細說明或觀看影片）
         </p>
 
         <div class="works-grid">
 
           <!-- 作品一：2D 動畫 -->
-          <article class="work-card">
+          <article class="work-card" onclick="openWorkModal(0)">
             <div class="work-image">
               <img
                 src="./thumb-2d.jpg"
+                onerror="handleImgError(this, 'thumb-2d.jpg', 'https://img.youtube.com/vi/kF-eNTpA4yY/hqdefault.jpg')"
                 alt="2D 動畫作品封面"
                 loading="lazy"
               >
@@ -795,10 +1234,11 @@
           </article>
 
           <!-- 作品二：AE 動態設計 -->
-          <article class="work-card">
+          <article class="work-card" onclick="openWorkModal(1)">
             <div class="work-image">
               <img
                 src="./thumb-ae-1.jpg"
+                onerror="handleImgError(this, 'thumb-ae-1.jpg', 'https://img.youtube.com/vi/QnOMhfVs3no/hqdefault.jpg')"
                 alt="After Effects 動態設計封面"
                 loading="lazy"
               >
@@ -817,10 +1257,11 @@
           </article>
 
           <!-- 作品三：數位繪圖 -->
-          <article class="work-card">
+          <article class="work-card" onclick="openWorkModal(2)">
             <div class="work-image">
               <img
                 src="./chibi-palette.jpg"
+                onerror="handleImgError(this, 'chibi-palette.jpg')"
                 alt="數位繪圖作品"
                 loading="lazy"
               >
@@ -839,10 +1280,11 @@
           </article>
 
           <!-- 作品四：視覺實驗 -->
-          <article class="work-card">
+          <article class="work-card" onclick="openWorkModal(3)">
             <div class="work-image">
               <img
                 src="./odyssey-express.jpg"
+                onerror="handleImgError(this, 'odyssey-express.jpg')"
                 alt="Odyssey Express 視覺作品"
                 loading="lazy"
               >
@@ -934,6 +1376,35 @@
 
   </main>
 
+  <!-- ===== 作品彈窗 Modal ===== -->
+  <div class="modal-overlay" id="workModal" onclick="closeWorkModalOnOverlay(event)" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-content">
+      <button class="modal-close-btn" onclick="closeWorkModal()" aria-label="關閉作品視窗">&times;</button>
+      
+      <div class="eyebrow" id="modalCategory">PROJECT DETAILS</div>
+      <h2 id="modalTitle" style="font-size: 26px; font-weight: 900; margin-bottom: 6px;">作品名稱</h2>
+      <div id="modalTags" class="tag-container" style="display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0;"></div>
+
+      <div id="modalMedia">
+        <!-- 動態置入 YouTube 播放器、圖片或畫廊 -->
+      </div>
+
+      <p class="modal-description" id="modalDesc">作品詳細描述內容...</p>
+
+      <div class="modal-meta">
+        <div class="modal-meta-item">
+          <strong>使用工具：</strong><span id="modalTools">After Effects, Photoshop</span>
+        </div>
+        <div class="modal-meta-item">
+          <strong>創作角色：</strong><span id="modalRole">動畫製作 / 動態設計</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 回頂部按鈕 -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="回到最上方">↑</button>
+
   <!-- ===== 頁尾 ===== -->
   <footer>
     <p>
@@ -945,13 +1416,347 @@
   <!-- ===== JavaScript ===== -->
   <script>
     // 自動更新年份
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    // 滾動到畫面時顯示區塊
+    // 圖片載入錯誤智慧容錯處理器（優先嘗試根目錄、次嘗試 images/ 目錄、最後嘗試線上備援）
+    function handleImgError(img, filename, onlineFallback) {
+      if (!img.dataset.retryCount) {
+        img.dataset.retryCount = "1";
+        img.src = "images/" + filename;
+      } else if (img.dataset.retryCount === "1") {
+        img.dataset.retryCount = "2";
+        img.src = "./" + filename;
+      } else if (onlineFallback && img.dataset.retryCount === "2") {
+        img.dataset.retryCount = "3";
+        img.src = onlineFallback;
+      }
+    }
+
+    // 作品資料庫（含 YouTube 影片與畫廊）
+    const worksData = [
+      {
+        title: "2D 動畫作品",
+        category: "01 / ANIMATION",
+        tags: ["2D Animation", "Storytelling"],
+        desc: "展示角色動態、細節動作連貫性、場景演出與分鏡敘事練習。",
+        tools: "Clip Studio Paint / TVPaint / Premiere Pro",
+        role: "分鏡腳本、角色動畫原畫、動態調整",
+        isVideo: true,
+        videos: [
+          {
+            title: "2D 動畫短片練習",
+            youtubeId: "kF-eNTpA4yY",
+            youtubeUrl: "https://youtu.be/kF-eNTpA4yY?si=L68b76QT4afmlGQW",
+            thumb: "./thumb-2d.jpg"
+          }
+        ]
+      },
+      {
+        title: "AE 動態設計",
+        category: "02 / MOTION DESIGN",
+        tags: ["After Effects", "Motion Design"],
+        desc: "展示文字動畫、循環動畫與動態視覺效果。運用 Speed Graph 控制平滑動態節奏與轉場。",
+        tools: "Adobe After Effects / Illustrator",
+        role: "動態設計、視覺特效、音效同步",
+        isVideo: true,
+        videos: [
+          {
+            title: "AE 動態作品 01",
+            youtubeId: "QnOMhfVs3no",
+            youtubeUrl: "https://youtu.be/QnOMhfVs3no?si=1mBZrSJB-gi2TeYj",
+            thumb: "./thumb-ae-1.jpg"
+          },
+          {
+            title: "AE 動態作品 02",
+            youtubeId: "TG32nuCMXow",
+            youtubeUrl: "https://youtu.be/TG32nuCMXow?si=6jr2Od1rgncY3IzP",
+            thumb: "./thumb-ae-2.jpg"
+          }
+        ]
+      },
+      {
+        title: "數位繪圖",
+        category: "03 / ILLUSTRATION",
+        tags: ["Illustration", "Digital Art"],
+        desc: "角色插畫、概念設計與個人色彩繪圖創作。",
+        tools: "Clip Studio Paint / Adobe Photoshop / Procreate",
+        role: "角色設計、概念插畫、色彩規劃",
+        isGallery: true,
+        gallery: [
+          {
+            src: "./chibi-palette.jpg",
+            title: "Chibi Character & Palette"
+          },
+          {
+            src: "./happy-halloween.jpg",
+            title: "HAPPY HALLOWEEN"
+          }
+        ]
+      },
+      {
+        title: "視覺實驗",
+        category: "04 / VISUAL EXPERIMENT",
+        tags: ["Experiment", "Visual Art"],
+        desc: "探索不同的構圖、色彩與視覺表現方式，結合世界觀設定與氛圍描繪。",
+        tools: "Mixed Media / Clip Studio Paint / Photoshop",
+        role: "世界觀構思、雙人角色立繪、線稿與色彩完稿",
+        isGallery: true,
+        gallery: [
+          {
+            src: "./odyssey-express.jpg",
+            title: "ODYSSEY EXPRESS"
+          }
+        ]
+      }
+    ];
+
+    let currentGalleryIndex = 0;
+    let activeGalleryItems = [];
+    let currentVideoIndex = 0;
+    let activeVideoList = [];
+
+    // 打開作品詳情彈窗
+    function openWorkModal(index) {
+      const data = worksData[index];
+      if (!data) return;
+
+      document.getElementById("modalCategory").textContent = data.category;
+      document.getElementById("modalTitle").textContent = data.title;
+      document.getElementById("modalDesc").textContent = data.desc;
+      document.getElementById("modalTools").textContent = data.tools;
+      document.getElementById("modalRole").textContent = data.role;
+
+      // 渲染標籤
+      const tagBox = document.getElementById("modalTags");
+      tagBox.innerHTML = "";
+      data.tags.forEach(t => {
+        const span = document.createElement("span");
+        span.className = "tag";
+        span.textContent = t;
+        tagBox.appendChild(span);
+      });
+
+      const mediaBox = document.getElementById("modalMedia");
+
+      if (data.isVideo && data.videos && data.videos.length > 0) {
+        activeVideoList = data.videos;
+        currentVideoIndex = 0;
+        activeGalleryItems = [];
+        renderVideoInModal();
+      } else if (data.isGallery && data.gallery && data.gallery.length > 0) {
+        activeGalleryItems = data.gallery;
+        activeVideoList = [];
+        currentGalleryIndex = 0;
+        renderGalleryInModal();
+      } else {
+        activeGalleryItems = [];
+        activeVideoList = [];
+        mediaBox.className = "";
+        mediaBox.innerHTML = "";
+      }
+
+      const modal = document.getElementById("workModal");
+      modal.classList.add("active");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden"; // 防止背景滾動
+    }
+
+    // 渲染 YouTube 播放器
+    function renderVideoInModal() {
+      const mediaBox = document.getElementById("modalMedia");
+      mediaBox.className = "";
+
+      const currentVideo = activeVideoList[currentVideoIndex];
+      const hasMultipleVideos = activeVideoList.length > 1;
+
+      mediaBox.innerHTML = `
+        <div class="video-player-wrap">
+          <iframe id="activeYoutubeIframe" src="https://www.youtube.com/embed/${currentVideo.youtubeId}?rel=0" title="${currentVideo.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="video-footer-bar">
+          <span id="activeVideoTitle" class="video-footer-title">${currentVideo.title}</span>
+          <a id="activeVideoLink" class="gallery-open-full" href="${currentVideo.youtubeUrl}" target="_blank" rel="noopener noreferrer">在 YouTube 上觀看 ↗</a>
+        </div>
+        ${hasMultipleVideos ? `
+          <div class="video-selector-grid">
+            ${activeVideoList.map((vid, idx) => `
+              <div class="video-select-item ${idx === currentVideoIndex ? 'active' : ''}" onclick="switchVideoSlide(${idx})">
+                <img src="${vid.thumb}" onerror="handleImgError(this, '${vid.thumb.replace('./', '')}', 'https://img.youtube.com/vi/${vid.youtubeId}/hqdefault.jpg')" alt="${vid.title}">
+                <span>${vid.title}</span>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+      `;
+    }
+
+    function switchVideoSlide(idx) {
+      currentVideoIndex = idx;
+      const currentVideo = activeVideoList[currentVideoIndex];
+      const iframe = document.getElementById("activeYoutubeIframe");
+      const titleEl = document.getElementById("activeVideoTitle");
+      const linkEl = document.getElementById("activeVideoLink");
+
+      if (iframe) {
+        iframe.src = `https://www.youtube.com/embed/${currentVideo.youtubeId}?rel=0&autoplay=1`;
+      }
+      if (titleEl) titleEl.textContent = currentVideo.title;
+      if (linkEl) linkEl.href = currentVideo.youtubeUrl;
+
+      const items = document.querySelectorAll(".video-select-item");
+      items.forEach((item, i) => {
+        if (i === currentVideoIndex) {
+          item.classList.add("active");
+        } else {
+          item.classList.remove("active");
+        }
+      });
+    }
+
+    // 渲染畫廊 (Gallery)
+    function renderGalleryInModal() {
+      const mediaBox = document.getElementById("modalMedia");
+      mediaBox.className = "gallery-container";
+
+      const currentItem = activeGalleryItems[currentGalleryIndex];
+      const hasMultiple = activeGalleryItems.length > 1;
+
+      mediaBox.innerHTML = `
+        <div class="gallery-main-view">
+          ${hasMultiple ? `<span class="gallery-counter">${currentGalleryIndex + 1} / ${activeGalleryItems.length}</span>` : ''}
+          ${hasMultiple ? `<button class="gallery-btn prev" onclick="changeGallerySlide(-1); event.stopPropagation();" aria-label="上一張">❮</button>` : ''}
+          <img id="galleryActiveImg" src="${currentItem.src}" onerror="handleImgError(this, '${currentItem.src.replace('./', '')}')" alt="${currentItem.title}">
+          ${hasMultiple ? `<button class="gallery-btn next" onclick="changeGallerySlide(1); event.stopPropagation();" aria-label="下一張">❯</button>` : ''}
+        </div>
+        <div class="gallery-caption-bar">
+          <div class="gallery-caption-title">${currentItem.title}</div>
+          <a class="gallery-open-full" href="${currentItem.src}" target="_blank" rel="noopener noreferrer">看原始大圖 ↗</a>
+        </div>
+        ${hasMultiple ? `
+          <div class="gallery-thumbs">
+            ${activeGalleryItems.map((item, idx) => `
+              <div class="gallery-thumb-item ${idx === currentGalleryIndex ? 'active' : ''}" onclick="selectGallerySlide(${idx})">
+                <img src="${item.src}" onerror="handleImgError(this, '${item.src.replace('./', '')}')" alt="${item.title}">
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+      `;
+    }
+
+    function changeGallerySlide(step) {
+      if (!activeGalleryItems.length) return;
+      currentGalleryIndex = (currentGalleryIndex + step + activeGalleryItems.length) % activeGalleryItems.length;
+      updateGalleryView();
+    }
+
+    function selectGallerySlide(idx) {
+      currentGalleryIndex = idx;
+      updateGalleryView();
+    }
+
+    function updateGalleryView() {
+      const currentItem = activeGalleryItems[currentGalleryIndex];
+      const img = document.getElementById("galleryActiveImg");
+      if (img) {
+        img.style.opacity = "0.3";
+        setTimeout(() => {
+          img.src = currentItem.src;
+          img.alt = currentItem.title;
+          img.style.opacity = "1";
+        }, 120);
+      }
+
+      const counter = document.querySelector(".gallery-counter");
+      if (counter) counter.textContent = `${currentGalleryIndex + 1} / ${activeGalleryItems.length}`;
+
+      const titleEl = document.querySelector(".gallery-caption-title");
+      const openEl = document.querySelector(".gallery-open-full");
+      if (titleEl) titleEl.textContent = currentItem.title;
+      if (openEl) openEl.href = currentItem.src;
+
+      const thumbs = document.querySelectorAll(".gallery-thumb-item");
+      thumbs.forEach((th, idx) => {
+        if (idx === currentGalleryIndex) {
+          th.classList.add("active");
+        } else {
+          th.classList.remove("active");
+        }
+      });
+    }
+
+    // 關閉彈窗
+    function closeWorkModal() {
+      const modal = document.getElementById("workModal");
+      modal.classList.remove("active");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+
+      // 停止影片播放（清空媒體內容避免背景持續出聲）
+      setTimeout(() => {
+        const mediaBox = document.getElementById("modalMedia");
+        if (mediaBox) mediaBox.innerHTML = "";
+      }, 250);
+    }
+
+    function closeWorkModalOnOverlay(e) {
+      if (e.target.id === "workModal") {
+        closeWorkModal();
+      }
+    }
+
+    // 鍵盤操作支援 (ESC 關閉、左右鍵切換畫廊)
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeWorkModal();
+      if (activeGalleryItems.length > 1) {
+        if (e.key === "ArrowLeft") changeGallerySlide(-1);
+        if (e.key === "ArrowRight") changeGallerySlide(1);
+      }
+    });
+
+    // 滾動監聽：導覽列陰影 & 回到頂部按鈕 & Active Link
+    const header = document.getElementById("mainHeader");
+    const backToTopBtn = document.getElementById("backToTop");
+    const navLinks = document.querySelectorAll(".nav-links a");
+    const sections = document.querySelectorAll("section");
+
+    window.addEventListener("scroll", () => {
+      const currentScroll = window.scrollY;
+
+      // 導覽列陰影
+      if (currentScroll > 30) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+
+      // 回頂部按鈕顯示
+      if (currentScroll > 400) {
+        backToTopBtn.classList.add("visible");
+      } else {
+        backToTopBtn.classList.remove("visible");
+      }
+
+      // 滾動選單當前高亮
+      let currentSection = "";
+      sections.forEach(sec => {
+        const secTop = sec.offsetTop - 150;
+        const secHeight = sec.offsetHeight;
+        if (currentScroll >= secTop && currentScroll < secTop + secHeight) {
+          currentSection = sec.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + currentSection) {
+          link.classList.add("active");
+        }
+      });
+    }, { passive: true });
+
+    // 滾動進場動畫 (IntersectionObserver)
     const revealElements = document.querySelectorAll(".reveal");
-
-    // 瀏覽器不支援 IntersectionObserver 時的備用處理
     if ("IntersectionObserver" in window) {
       const observer = new IntersectionObserver(
         (entries, observer) => {
@@ -962,10 +1767,13 @@
             }
           });
         },
-        {
-          threshold: 0.12
-        }
+        { threshold: 0.12 }
       );
+      revealElements.forEach((el) => observer.observe(el));
+    } else {
+      revealElements.forEach((el) => el.classList.add("visible"));
+    }
+  </script>
 
-      revealElements.forEach((element) => {
-        obser
+</body>
+</html>
