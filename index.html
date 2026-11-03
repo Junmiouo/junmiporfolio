@@ -27,6 +27,94 @@
       --border: #E9DADB;
     }
 
+    /* ===== 深色模式 ===== */
+    :root[data-theme="dark"] {
+      --bg: #21151C;
+      --panel: #30212A;
+      --pink: #FF9AA8;
+      --lime: #BFCB72;
+      --wine: #F8E9EC;
+      --gray: #C8B7C0;
+      --border: #59404D;
+    }
+
+    :root[data-theme="dark"] #about,
+    :root[data-theme="dark"] #works {
+      background: #281B24;
+    }
+
+    :root[data-theme="dark"] .skill-card:nth-child(2) {
+      background: #38242F;
+    }
+
+    :root[data-theme="dark"] .skill-card:nth-child(3) {
+      background: #343323;
+    }
+
+    :root[data-theme="dark"] .about-card p {
+      color: #302719;
+    }
+
+    :root[data-theme="dark"] #contact {
+      background: #41452A;
+    }
+
+    :root[data-theme="dark"] header {
+      background: rgba(33, 21, 28, 0.94);
+    }
+
+    :root[data-theme="dark"] .work-image span {
+      text-shadow: 0 0 14px rgba(33, 21, 28, 0.95), 0 0 4px rgba(33, 21, 28, 0.85);
+    }
+
+    :root[data-theme="dark"] .work-card:nth-child(3) .work-image span {
+      color: #F8E9EC;
+    }
+
+    :root[data-theme="dark"] .gallery-counter {
+      background: rgba(48, 33, 42, 0.95);
+      color: #F8E9EC;
+    }
+
+    :root[data-theme="dark"] footer {
+      background: #140D12;
+    }
+
+    body, header, section, .skill-card, .work-card, .modal-content,
+    .video-footer-bar, .video-select-item, .gallery-caption-bar,
+    .gallery-btn, .contact-box, .contact-links a, .hero-sticker {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .theme-toggle {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 8px 13px;
+      border: 2px solid var(--wine);
+      border-radius: 999px;
+      background: var(--pink);
+      color: var(--wine);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--wine);
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .theme-toggle:hover {
+      background: var(--lime);
+      transform: translateY(-2px);
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 3px solid #D45F72;
+      outline-offset: 4px;
+    }
+
     /* ===== 基礎設定 ===== */
     * {
       margin: 0;
@@ -992,6 +1080,12 @@
         font-size: 12px;
       }
 
+      .theme-toggle {
+        margin-top: 5px;
+        padding: 6px 11px;
+        font-size: 12px;
+      }
+
       #home {
         padding-top: 140px;
         min-height: auto;
@@ -1072,6 +1166,11 @@
         <li><a href="#journey">歷程</a></li>
         <li><a href="#contact">聯絡</a></li>
       </ul>
+      <button class="theme-toggle" id="themeToggle" type="button"
+        aria-label="切換深色模式" aria-pressed="false">
+        <span id="themeIcon" aria-hidden="true">🌙</span>
+        <span id="themeLabel">深色</span>
+      </button>
     </nav>
   </header>
 
@@ -1415,6 +1514,31 @@
 
   <!-- ===== JavaScript ===== -->
   <script>
+    // ===== 深色模式切換（記住使用者選擇）=====
+    const themeToggle = document.getElementById("themeToggle");
+    const themeIcon = document.getElementById("themeIcon");
+    const themeLabel = document.getElementById("themeLabel");
+    const savedTheme = localStorage.getItem("junmi-theme");
+    const initialTheme = savedTheme === "dark" ? "dark" : "light";
+
+    function applyTheme(theme) {
+      document.documentElement.dataset.theme = theme;
+      const isDark = theme === "dark";
+      themeIcon.textContent = isDark ? "☀️" : "🌙";
+      themeLabel.textContent = isDark ? "淺色" : "深色";
+      themeToggle.setAttribute("aria-pressed", String(isDark));
+      themeToggle.setAttribute("aria-label", isDark ? "切換淺色模式" : "切換深色模式");
+      document.querySelector('meta[name="theme-color"]')
+        ?.setAttribute("content", isDark ? "#21151C" : "#FEFFEF");
+    }
+
+    applyTheme(initialTheme);
+    themeToggle.addEventListener("click", () => {
+      const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      localStorage.setItem("junmi-theme", nextTheme);
+      applyTheme(nextTheme);
+    });
+
     // 自動更新年份
     document.getElementById("year").textContent = new Date().getFullYear();
 
